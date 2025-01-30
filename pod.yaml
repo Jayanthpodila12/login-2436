@@ -1,11 +1,16 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-pod
+  name: mc-pod
 spec:
   containers:
-  - name: nginx
+  - name: c1
     image: nginx
     ports:
     - containerPort: 80
+  - name: c2
+    image: ubuntu
+    command: ["sleep"]
+    args: ["300"]
+    
 
