@@ -1,2 +1,6 @@
-FROM
+apiVersion: 
+kind: 
+metadata:
+spec:
+
 
