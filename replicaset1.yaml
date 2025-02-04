@@ -1,0 +1,22 @@
+# Replicaset Template
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: postgres-db
+spec:
+  # 1 Pod should exist at all times.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres
+        ports:
+        - containerPort: 5732
+
