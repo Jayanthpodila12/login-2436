@@ -19,13 +19,13 @@ spec:
       volumes:
        - name: task-pv-storage
          persistentVolumeClaim:
-           claimName: login-pv-claim
+          claimName: login-pv-claim
       containers:
        - name: task-pv-container
          image: jayanthpodila/ecomm:v1
          ports:
            - containerPort: 80
-        volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: task-pv-storage
+         volumeMounts:
+           - mountPath: "/usr/share/nginx/html"
+             name: task-pv-storage
 
