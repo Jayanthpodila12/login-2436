@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   # Unique key of the Deployment instance
-  name: nginx-deployment
+  name: login-deployment
 spec:
   # 3 Pods should exist at all times.
   replicas: 1
@@ -16,9 +16,17 @@ spec:
         # the Deployment label selector to this value
         app: nginx
     spec:
+      volumes:
+       - name: task-pv-storage
+         persistentVolumeClaim:
+           claimName: login-pv-claim
       containers:
-      - name: nginx-container
+       - name: nginx-container
         # Run this image
-        image: nginx:alpine
+        image: jayanthpodila/ecomm:v1
         ports:
         - containerPort: 80
+        volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+
