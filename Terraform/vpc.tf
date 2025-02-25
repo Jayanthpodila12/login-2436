@@ -53,3 +53,13 @@ resource "aws_route_table" "lms-pub-rt" {
     Name = "lms-public-rt"
   }
 }
+# Create Web subnet Association
+resource "aws_route_table_association" "lms-web-asc" {
+  subnet_id      = aws_subnet.lms-web-sn.id
+  route_table_id = aws_route_table.lms-pub-rt.id
+}
+# Create API subnet Association
+resource "aws_route_table_association" "lms-api-asc" {
+  subnet_id      = aws_subnet.lms-api-sn.id
+  route_table_id = aws_route_table.lms-pub-rt.id
+}
