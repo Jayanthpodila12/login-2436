@@ -42,3 +42,14 @@ resource "aws_internet_gateway" "lms-gw" {
     Name = "Lms-Internet-Gateway"
   }
 }
+# Create public route table
+resource "aws_route_table" "lms-pub-rt" {
+  vpc_id = aws_vpc.lms.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.lms-igw.id
+  }
+  tags = {
+    Name = "lms-public-rt"
+  }
+}
