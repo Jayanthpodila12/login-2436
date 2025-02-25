@@ -7,9 +7,7 @@ resource "aws_vpc" "lms" {
     Name = "lms"
   }
 }
-
 # Create web Subnets
-
 resource "aws_subnet" "lms-web-sn" {
   vpc_id     = aws_vpc.lms.id
   cidr_block = "10.0.1.0/24"
@@ -18,9 +16,7 @@ resource "aws_subnet" "lms-web-sn" {
     Name = "lms-web-subnet"
   }
 }
-
 # Create API Subnets
-
 resource "aws_subnet" "lms-api-sn" {
   vpc_id     = aws_vpc.lms.id
   cidr_block = "10.0.2.0/24"
@@ -29,9 +25,7 @@ resource "aws_subnet" "lms-api-sn" {
     Name = "lms-api-subnet"
   }
 }
-
 # Create db Subnets
-
 resource "aws_subnet" "lms-db-sn" {
   vpc_id     = aws_vpc.lms.id
   cidr_block = "10.0.3.0/24"
