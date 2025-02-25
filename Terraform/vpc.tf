@@ -71,7 +71,7 @@ resource "aws_route_table" "lms-pvt-rt" {
     Name = "lms-private-rt"
   }
 }
-# Create sb subnet Association
+# Create db subnet Association
 resource "aws_route_table_association" "lms-db-asc" {
   subnet_id      = aws_subnet.lms-db-sn.id
   route_table_id = aws_route_table.lms-pvt-rt.id
