@@ -34,3 +34,11 @@ resource "aws_subnet" "lms-db-sn" {
     Name = "lms-db-subnet"
   }
 }
+# Create Internet Gateway
+resource "aws_internet_gateway" "lms-gw" {
+  vpc_id = aws_vpc.lms.id
+
+  tags = {
+    Name = "Lms-Internet-Gateway"
+  }
+}
