@@ -112,3 +112,22 @@ resource "aws_network_acl" "lms-NACL" {
     Name = "lms-NACL"
   }
 }
+
+# NACL Associations - Web
+resource "aws_network_acl_association" "lms-nacl-asc-web" {
+  network_acl_id = aws_network_acl.lms-NACL.id
+  subnet_id      = aws_subnet.lms-web-sn.id
+}
+
+# NACL Associations - API
+resource "aws_network_acl_association" "lms-nacl-asc-API" {
+  network_acl_id = aws_network_acl.lms-NACL.id
+  subnet_id      = aws_subnet.lms-api-sn.id
+}
+
+
+# NACL Associations - DB
+resource "aws_network_acl_association" "lms-nacl-asc-db" {
+  network_acl_id = aws_network_acl.lms-NACL.id
+  subnet_id      = aws_subnet.lms-db-sn.id
+}
