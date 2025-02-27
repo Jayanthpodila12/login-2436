@@ -143,3 +143,99 @@ resource "aws_security_group" "lms-web-sg" {
   }
 }
 
+# Web Security Group Ingress Rule - ssh
+resource "aws_vpc_security_group_ingress_rule" "lms-web-sg-ssh" {
+  security_group_id = aws_security_group.lms-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+
+# Web Security Group Ingress Rule - http
+resource "aws_vpc_security_group_ingress_rule" "lms-web-sg-http" {
+  security_group_id = aws_security_group.lms-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+
+# Web Security Group Egress Rule - All
+resource "aws_vpc_security_group_egress_rule" "lms-web-sg-all" {
+  security_group_id = aws_security_group.lms-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" # semantically equivalent to all ports
+}
+
+# API Security Group
+resource "aws_security_group" "lms-api-sg" {
+  name        = "lms-api-sg"
+  description = "Allow API Traffic"
+  vpc_id      = aws_vpc.lms.id
+
+  tags = {
+    Name = "lms-api-sg"
+  }
+}
+
+# API Security Group Ingress Rule - ssh
+resource "aws_vpc_security_group_ingress_rule" "lms-api-sg-ssh" {
+  security_group_id = aws_security_group.lms-api-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+
+# API Security Group Ingress Rule - http
+resource "aws_vpc_security_group_ingress_rule" "lms-api-sg-http" {
+  security_group_id = aws_security_group.lms-api-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 8080
+  ip_protocol       = "tcp"
+  to_port           = 8080
+}
+
+# API Security Group Egress Rule - All
+resource "aws_vpc_security_group_egress_rule" "lms-api-sg-all" {
+  security_group_id = aws_security_group.lms-api-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" # semantically equivalent to all ports
+}
+
+# DB Security Group
+resource "aws_security_group" "lms-db-sg" {
+  name        = "lms-db-sg"
+  description = "Allow DB Traffic"
+  vpc_id      = aws_vpc.lms.id
+
+  tags = {
+    Name = "lms-db-sg"
+  }
+}
+
+# DB Security Group Ingress Rule - ssh
+resource "aws_vpc_security_group_ingress_rule" "lms-db-sg-ssh" {
+  security_group_id = aws_security_group.lms-db-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+
+# DB Security Group Ingress Rule - postgres
+resource "aws_vpc_security_group_ingress_rule" "lms-db-sg-postgres" {
+  security_group_id = aws_security_group.lms-db-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 5432
+  ip_protocol       = "tcp"
+  to_port           = 5432
+}
+
+# DB Security Group Egress Rule - All
+resource "aws_vpc_security_group_egress_rule" "lms-db-sg-all" {
+  security_group_id = aws_security_group.lms-db-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" # semantically equivalent to all ports
+}
