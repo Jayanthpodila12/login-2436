@@ -239,3 +239,16 @@ resource "aws_vpc_security_group_egress_rule" "lms-db-sg-all" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1" # semantically equivalent to all ports
 }
+
+# EC2 Web Server
+resource "aws_instance" "lms-web-server" {
+  ami           = "ami-07d2649d67dbe8900"
+  instance_type = "t2.micro"
+  key_name      = "RSATOKEN"
+  subnet_id     = aws_subnet.lms-web-sn.id
+  vpc_security_group_ids = [aws_security_group.lms-web-sg.id]
+  
+  tags = {
+    Name = "lms-web-server"
+  }
+}
